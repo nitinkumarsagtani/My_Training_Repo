@@ -1,4 +1,4 @@
-class SalesTax 
+class SalesTaxCalculator 
 
   def tax_calculator
     

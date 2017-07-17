@@ -1,6 +1,6 @@
 require_relative 'sales_tax'
 
-class Item < SalesTax
+class Item < SalesTaxCalculator
   
   def input
     
