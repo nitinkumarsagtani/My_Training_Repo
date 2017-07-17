@@ -1,17 +1,6 @@
-require_relative 'sales_tax'
+require_relative 'sales_tax_calculator'
 
 class Item < SalesTaxCalculator
-  
-  def input
-    
-    @item_list = []
-    
-    puts "Enter the List Details :"
-    while (string = gets) != "\n"
-      @item_list << string.chomp.split(" ")
-    end 
-
-  end
   
   def attributes
     
@@ -63,4 +52,4 @@ item.input
 item.attributes
 item.tax_calculator
 item.updated_price
-item.show_output
+item.output

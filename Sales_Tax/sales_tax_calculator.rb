@@ -1,4 +1,6 @@
-class SalesTaxCalculator 
+require_relative 'order'
+
+class SalesTaxCalculator < Order
 
   def tax_calculator
     
@@ -47,17 +49,4 @@ class SalesTaxCalculator
 
   end
 
-  def show_output
-    
-    updated_price
-    
-    puts "\nOutput is : "
-    @item_list.each do |element|
-      puts "  #{element.map {|value| value == 'at' ? ':' : value }.join (" ")}\n"
-    end
-
-    puts "\n  Sales Tax : #{@total_sales_tax.round(2)}"
-    puts "  Total : #{total_amount.round(2)}"
-  
-  end
 end
