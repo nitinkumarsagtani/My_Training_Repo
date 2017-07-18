@@ -1,52 +1,21 @@
-require_relative 'order'
 
-class SalesTaxCalculator < Order
+module SalesTaxCalculator
 
-  def tax_calculator
-    
-    @total_sales_tax = 0
-    
-    @price.length.times do |index|
-      
-      sum = 0
-      
-      if @taxable[index] == false && @import[index] == true
-        sum = sum + (@quantity[index].to_i*@price[index].to_f*0.05) 
-        sales_tax_price(index,sum)
-      
-      elsif @taxable[index] == false && @import[index] == false
-        sales_tax_price(index,sum)
-      
-      elsif @taxable[index] == true && @import[index] == false
-        sum = sum + ((@quantity[index].to_f*@price[index].to_f)*0.10)
-        sales_tax_price(index,sum)
-      
-      else
-        sum = sum + (@quantity[index].to_f*@price[index].to_f*0.15)
-        sales_tax_price(index,sum)
-      end
-
-    end
-
-  end
-  
-  def sales_tax_price (index,sum)
-    
-    @total_sales_tax = @total_sales_tax + sum
-    @price[index] = @price[index].to_f + sum
-  
+  def calculate_tax
+    self.import_tax = self.get_import_tax
+    self.sales_tax = self.get_sales_tax
   end
 
-  def total_amount
-    
-    total = 0
-    
-    @price.each do |element|
-      total = total + element
-    end
-    
-    total
-
+  def get_sales_tax
+    return self.quantity * self.price * 0.10 unless is_tax_free?
+    0
   end
 
+  def get_import_tax
+    return self.quantity * self.price * 0.05 if is_imported?
+    0
+  end
 end
+
+
+
